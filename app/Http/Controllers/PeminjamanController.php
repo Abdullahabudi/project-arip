@@ -10,9 +10,12 @@ class PeminjamanController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $peminjamans = Peminjaman::with(['user', 'motor'])->latest()->paginate(10);
+        $peminjamans = Peminjaman::with(['motor'])->latest()->paginate(10);
         return view('peminjaman.index', compact('peminjamans'));
     }
 
@@ -21,9 +24,8 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        $users = \App\Models\User::all();
         $motors = \App\Models\Motor::where('status', 'available')->get();
-        return view('peminjaman.create', compact('users', 'motors'));
+        return view('peminjaman.create', compact('motors'));
     }
 
     /**
@@ -32,7 +34,7 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'borrower_name' => 'required|string|max:255',
             'motor_id' => 'required|exists:motors,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
@@ -66,9 +68,8 @@ class PeminjamanController extends Controller
      */
     public function edit(Peminjaman $peminjaman)
     {
-        $users = \App\Models\User::all();
-        $motors = \App\Models\Motor::all(); // Show all motors in edit, in case we want to change it
-        return view('peminjaman.edit', compact('peminjaman', 'users', 'motors'));
+        $motors = \App\Models\Motor::all();
+        return view('peminjaman.edit', compact('peminjaman', 'motors'));
     }
 
     /**
@@ -77,7 +78,7 @@ class PeminjamanController extends Controller
     public function update(Request $request, Peminjaman $peminjaman)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'borrower_name' => 'required|string|max:255',
             'motor_id' => 'required|exists:motors,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
@@ -93,7 +94,7 @@ class PeminjamanController extends Controller
             $motor->status = 'available';
             $motor->save();
         } elseif ($peminjaman->status == 'returned' && $input['status'] == 'active') {
-            $motor = \App\Models\Motor::find($input['motor_id']); // Use new motor_id if changed
+            $motor = \App\Models\Motor::find($input['motor_id']);
             $motor->status = 'borrowed';
             $motor->save();
         }

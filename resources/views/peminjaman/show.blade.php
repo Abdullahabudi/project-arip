@@ -17,7 +17,7 @@
                     <table class="table table-borderless">
                         <tr>
                             <th width="200px">Nama Pengguna</th>
-                            <td>: {{ $peminjaman->user->name }}</td>
+                            <td>: {{ $peminjaman->borrower_name }}</td>
                         </tr>
                         <tr>
                             <th>Motor</th>

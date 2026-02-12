@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('borrower_name');
             $table->foreignId('motor_id')->constrained()->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');

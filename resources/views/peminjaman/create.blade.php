@@ -28,13 +28,8 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="user_id" class="form-label">Pengguna</label>
-                        <select name="user_id" class="form-select">
-                            <option value="">Pilih Pengguna</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="borrower_name" class="form-label">Pengguna</label>
+                        <input type="text" name="borrower_name" class="form-control" placeholder="Nama Peminjam">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="motor_id" class="form-label">Motor</label>

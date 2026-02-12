@@ -36,7 +36,7 @@
                         @foreach ($peminjamans as $peminjaman)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $peminjaman->user->name }}</td>
+                                <td>{{ $peminjaman->borrower_name }}</td>
                                 <td>{{ $peminjaman->motor->brand }} - {{ $peminjaman->motor->plate_number }}</td>
                                 <td>{{ $peminjaman->start_date }}</td>
                                 <td>{{ $peminjaman->end_date }}</td>
