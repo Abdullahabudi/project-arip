@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-gray-100">
     <div class="container-fluid px-4">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            Peminjaman Motor
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('dashboard') }}">
+            <i class="bi bi-speedometer2 text-primary fs-4"></i>
+            <span>Peminjaman Motor</span>
         </a>
 
         <!-- Hamburger -->
